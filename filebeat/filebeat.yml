@@ -1,0 +1,12 @@
+filebeat.prospectors:
+- type: log
+  enabled: true
+  paths:
+    - /opt/log/*.log
+
+output.logstash:
+  hosts: ["logstash:5044"]
+  enabled: true
+  index: 'logtest'
+
+logging.level: debug

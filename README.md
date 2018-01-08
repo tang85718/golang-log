@@ -1,0 +1,1 @@
+go get github.com/heatxsink/go-logstash

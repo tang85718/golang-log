@@ -1,0 +1,7 @@
+[template]
+src = "filebeat.yml.tmpl"
+dest = "/etc/filebeat/filebeat.yml"
+keys = [
+    "/self/stack/metadata/fb/hosts",
+    "/self/stack/metadata/fb/paths"
+]
