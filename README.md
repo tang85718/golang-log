@@ -1,1 +1,1 @@
-go get github.com/heatxsink/go-logstash
+go get github.com/gorilla/mux

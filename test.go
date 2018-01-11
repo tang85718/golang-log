@@ -1,69 +1,32 @@
 package main
 
 import (
+	"./strtech"
 	"time"
-	"os"
-	"log"
-	"encoding/json"
-	"bufio"
+	"math/rand"
 )
 
-//func main() {
-//	host, err := os.Hostname()
-//	if err != nil {
-//		fmt.Println(err)
-//		host = "Baba"
-//	}
-//
-//	msg := fmt.Sprintf("{ \"host\":\"%s\", \"contex\":\"fuck some things\" }", host)
-//
-//	for {
-//		l := logstash.New("logstash", 5045, 5)
-//		conn, err := l.Connect()
-//		if err != nil {
-//			fmt.Println(err)
-//			time.Sleep(time.Second)
-//			continue
-//		}
-//
-//		err = l.Writeln(msg)
-//		if err != nil {
-//			fmt.Println(err)
-//			time.Sleep(time.Second)
-//			continue
-//		}
-//
-//		conn.Close()
-//		time.Sleep(time.Second)
-//	}
-//}
-
 func main() {
-	flag := os.O_RDWR | os.O_CREATE | os.O_APPEND
-	f, err := os.OpenFile("/opt/log/json.log", flag, 0777)
-	if err != nil {
-		log.Printf("创建日志文件失败！！！")
-		return
-	}
 
-	w := bufio.NewWriter(f)
+	log := new(strtech.Logging)
+	log.Setup("")
 
-	hostname, err := os.Hostname()
-	if err != nil {
-		hostname = "Baba"
-	}
-	index := 0
+	content := [...]string{
+		"成就天下无双之力",
+		"流放之王",
+		"暗黑破坏神迪亚波罗",
+		"剑仙李逍遥",
+		"喜剧之王",
+		"破烂指针",
+		"僵尸妹妹爱大吊",
+		"僵尸哥哥爱美丽",
+		"无厘小仙女"}
+
 	for {
-		d := map[string]string{"name":hostname, "content":"fuck log system"}
-		js, _:= json.Marshal(d)
-		str := string(js) + string('\n')
-		log.Println(str)
-		w.WriteString(str)
-		w.Flush()
-
+		size := len(content)
+		r := rand.Intn(size)
+		str := content[r]
+		log.Debug(str)
 		time.Sleep(time.Second)
-		index ++
 	}
-
-	f.Close()
 }

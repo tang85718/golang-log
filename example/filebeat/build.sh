@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# 构建 docker 镜像并上传到 docker hub
+# 构建 build 镜像并上传到 build hub
 export VERSION=1.0
 docker build -t filebeat:${VERSION} .
 
